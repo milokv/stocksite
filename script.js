@@ -6,9 +6,17 @@ function subscribeToSymbol(symbol) {
     socket.send(JSON.stringify({ 'type': 'subscribe', 'symbol': symbol }));
 }
 
-// Function to display the stock price
-function displayStockPrice(price) {
-    document.getElementById('priceDisplay').innerText = `Current Price: $${price}`;
+// Function to unsubscribe from a stock symbol
+function unsubscribeFromSymbol(symbol) {
+    socket.send(JSON.stringify({ 'type': 'unsubscribe', 'symbol': symbol }));
+}
+
+// Function to display the stock ticker and price
+function displayStockInfo(symbol, price) {
+    const priceDisplay = document.getElementById('priceDisplay');
+    priceDisplay.innerHTML = `Stock Ticker: ${symbol}<br>Current Price: $${price}`;
+    // After displaying the initial info, unsubscribe from further updates
+    unsubscribeFromSymbol(symbol);
 }
 
 // Event listener for the submit button
@@ -22,6 +30,12 @@ socket.addEventListener('message', function (event) {
     const data = JSON.parse(event.data);
     if (data.type === 'trade') {
         const price = data.data[0].p;
-        displayStockPrice(price);
+        const symbol = document.getElementById('tickerInput').value;
+        displayStockInfo(symbol, price);
     }
+});
+
+// Add an event listener to the input element
+document.getElementById('tickerInput').addEventListener('input', function () {
+    this.value = this.value.toUpperCase();
 });
