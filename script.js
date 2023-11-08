@@ -1,4 +1,4 @@
-// Websocket connection
+// öppna websocket connection med api key
 const socket = new WebSocket('wss://ws.finnhub.io?token=cl2ku79r01qq10c2d84gcl2ku79r01qq10c2d850');
 
 // Function to subscribe to a stock symbol
@@ -15,8 +15,6 @@ function unsubscribeFromSymbol(symbol) {
 function displayStockInfo(symbol, price) {
     const priceDisplay = document.getElementById('priceDisplay');
     priceDisplay.innerHTML = `Stock Ticker: ${symbol}<br>Current Price: $${price}`;
-    // After displaying the initial info, unsubscribe from further updates
-    unsubscribeFromSymbol(symbol);
 }
 
 // Event listener for the submit button
@@ -38,4 +36,10 @@ socket.addEventListener('message', function (event) {
 // Add an event listener to the input element
 document.getElementById('tickerInput').addEventListener('input', function () {
     this.value = this.value.toUpperCase();
+});
+
+// Add an event listener to the unsubcribe button to stop recieving price updates
+document.getElementById('unsubButton').addEventListener('click', () => {
+    const ticker = document.getElementById('tickerInput').value;
+    unsubscribeFromSymbol(ticker);
 });
