@@ -9,16 +9,16 @@
     <title>STOCK TICKERS</title>
 </head>
 
-<body style="height: 100%; background-color: black;">
+<body style="background-color: black;">
     <div class="center" style="height: 100vh;" data-bs-theme="dark">
-        <div class="mt-4 center tickerbox">
-            <h4 style="color: white;">STOCK PRICE CHECKER</h4>
-            <div>
+        <div class="tickerBox" id="priceBoxCenter">
+            <h4 style="color: white;" class="m-4" >STOCK PRICE CHECKER</h4>
+            <div class="m-4">
                 <input type="text" id="tickerInput" placeholder="Enter Stock Ticker">
                 <button id="submitButton">Get Price</button>
-                <button id="unsubButton">Cancel</button>
+                <button id="unsubButton">Stop Updates</button>
             </div>
-            <div id="priceDisplay" style="color: white;"></div>
+            <div id="priceDisplay" style="color: white; border-color: green;" class="m-4 tickerBox center"></div>
         </div>
     </div>
 

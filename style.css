@@ -5,10 +5,16 @@
     justify-content: center;
 }
 
-.tickerbox {
+#priceBoxCenter{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tickerBox {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    height: 20%;
-    width: 20%;
+    height: 40%;
+    width: 40%;
     border-color: white;
     border-style: solid;
 }
