@@ -1,9 +1,33 @@
 // open a websocket connection with my api key
 const socket = new WebSocket('wss://ws.finnhub.io?token=cl2ku79r01qq10c2d84gcl2ku79r01qq10c2d850');
 
+symbol = '';
+
 // global definition of "symbol" (which stockticker to get price from)
 document.getElementById('submitButton').addEventListener('click', () => {
-    symbol = document.getElementById('tickerInput').value;
+    if (symbol != '') {
+        unsubscribeFromSymbol(symbol);
+        symbol = document.getElementById('tickerInput').value;
+        if (symbol != '') {
+            console.log('Recieving price updates from: ' + symbol);
+            subscribeToSymbol(symbol);
+        }
+        else {
+            console.log('new symbol == null');
+            displayStockInfo('null', '0.0');
+        }
+    }
+    else if (symbol == '') {
+        symbol = document.getElementById('tickerInput').value;
+        if (symbol == '') {
+            console.log('symbol = null');
+            displayStockInfo('null', '0.0')
+        }
+        else if (symbol != '') {
+            console.log('Recieving price updates from: ' + symbol);
+            subscribeToSymbol(symbol);
+        }
+    }
 });
 
 // Function to subscribe to a stock symbol  (GPT)
@@ -13,6 +37,7 @@ function subscribeToSymbol(symbol) {
 
 // Function to unsubscribe from a stock symbol (GPT)
 function unsubscribeFromSymbol(symbol) {
+    console.log('Stopping price updates for: ' + symbol);
     socket.send(JSON.stringify({ 'type': 'unsubscribe', 'symbol': symbol }));
 }
 
@@ -21,12 +46,6 @@ function displayStockInfo(symbol, price) {
     const priceDisplay = document.getElementById('priceDisplay');
     priceDisplay.innerHTML = `Stock Ticker: ${symbol}<br>Current Price: $${price}`;
 }
-
-// start recieving price updates from inputted ticker
-document.getElementById('submitButton').addEventListener('click', function() {
-    console.log('Recieving price updates from: ' + symbol)
-    subscribeToSymbol(symbol);
-});
 
 
 // Listen for messages from the server (GPT) + log in console when price is updated
@@ -46,6 +65,10 @@ document.getElementById('tickerInput').addEventListener('input', function() {
 
 // stop recieving price updates when stop button is pressed
 document.getElementById('unsubButton').addEventListener('click', () => {
-    console.log('Stopping price updates for: ' + symbol);
-    unsubscribeFromSymbol(symbol);
+    if (symbol != '') {
+        unsubscribeFromSymbol(symbol);
+    }
+    else {
+        console.log('No ticker picked, cant unsubscribe from symbol')
+    }
 });

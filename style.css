@@ -16,5 +16,5 @@
     height: 40%;
     width: 40%;
     border-color: white;
-    border-style: solid;
+    border-style: outset; 
 }
