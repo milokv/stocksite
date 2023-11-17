@@ -3,7 +3,7 @@ const socket = new WebSocket('wss://ws.finnhub.io?token=cl2ku79r01qq10c2d84gcl2k
 
 symbol = '';
 
-// global definition of "symbol" (which stockticker to get price from)
+// global definition of "symbol" (which stockticker to get price from) + error handling
 document.getElementById('submitButton').addEventListener('click', () => {
     if (symbol != '') {
         unsubscribeFromSymbol(symbol);
@@ -63,7 +63,7 @@ document.getElementById('tickerInput').addEventListener('input', function() {
     this.value = this.value.toUpperCase();
 });
 
-// stop recieving price updates when stop button is pressed
+// stop recieving price updates when stop button is pressed + error handling
 document.getElementById('unsubButton').addEventListener('click', () => {
     if (symbol != '') {
         unsubscribeFromSymbol(symbol);
