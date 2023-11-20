@@ -11,6 +11,13 @@
         flex-direction: column;
         align-items: center;
     } 
+    .inputSize {
+        width: 250px;
+        margin-bottom: 10px;
+    }
+    .tickerBox {
+        color: white;
+    }
 }
 
 @media only screen and (min-width: 600px) {
@@ -26,10 +33,12 @@
         align-items: center;
     } 
     .tickerBox {
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         height: 40%;
         width: 40%;
-        border-color: white;
-        border-style: outset; 
+        color: white;
     }    
+    .inputSize {
+        width: 200px;
+        margin-bottom: 10px;
+    }
 }
