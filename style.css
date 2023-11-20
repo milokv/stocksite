@@ -1,20 +1,35 @@
-.center {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+
+@media only screen and (max-width: 600px) {
+    .center {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    #priceBoxCenter{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    } 
 }
 
-#priceBoxCenter{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.tickerBox {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    height: 40%;
-    width: 40%;
-    border-color: white;
-    border-style: outset; 
+@media only screen and (min-width: 600px) {
+    .center {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    #priceBoxCenter{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    } 
+    .tickerBox {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        height: 40%;
+        width: 40%;
+        border-color: white;
+        border-style: outset; 
+    }    
 }
