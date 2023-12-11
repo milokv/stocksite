@@ -12,17 +12,17 @@
 <body style="background-color: black;">
     <div class="center" style="height: 100vh;" data-bs-theme="dark">
         <div class="tickerBox" id="priceBoxCenter">
-            <h4 style="color: white;" class="m-4" >STOCK PRICE CHECKER</h4>
+            <h4 style="color: white;">STOCK PRICE CHECKER</h4>
+            <p>Please enter the Stock Ticker you want to check <br> the price for (example: AAPL, MSFT)</p>
             <div class="m-4">
                 <input type="text" id="tickerInput" class="inputSize" placeholder="Enter Stock Ticker">
                 <br>
                 <button id="submitButton" style="margin-right: 10px;">Get Price</button>
                 <button id="unsubButton">Stop Updates</button>
             </div>
-            <div id="priceDisplay" class="m-4 tickerBox center"></div>
+            <div id="priceDisplay" class="tickerBox center"></div>
         </div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>

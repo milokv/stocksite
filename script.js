@@ -20,12 +20,15 @@ document.getElementById('submitButton').addEventListener('click', () => {
     else if (symbol == '') {
         symbol = document.getElementById('tickerInput').value;
         if (symbol == '') {
-            console.log('symbol = null');
-            displayStockInfo('null', '0.0')
+            console.log('No ticker picked')
+            const errorDisplay = document.getElementById('priceDisplay');
+            errorDisplay.innerHTML = `No ticker picked`;
         }
         else if (symbol != '') {
             console.log('Recieving price updates from: ' + symbol);
             subscribeToSymbol(symbol);
+            const errorDisplay = document.getElementById('priceDisplay');
+            errorDisplay.innerHTML = `Subscribed to updates for ${symbol}`;
         }
     }
 });
@@ -70,5 +73,7 @@ document.getElementById('unsubButton').addEventListener('click', () => {
     }
     else {
         console.log('No ticker picked, cant unsubscribe from symbol')
+        const errorDisplay = document.getElementById('priceDisplay');
+        errorDisplay.innerHTML = `No ticker picked, cant unsubscribe from symbol`;
     }
 });
