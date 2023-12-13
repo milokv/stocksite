@@ -3,7 +3,7 @@ const socket = new WebSocket('wss://ws.finnhub.io?token=cl2ku79r01qq10c2d84gcl2k
 
 symbol = '';
 
-// global definition of "symbol" (which stockticker to get price from) + error handling
+// when button is pressed, get symbol and subscribe to updates + error handling
 document.getElementById('submitButton').addEventListener('click', () => {
     if (symbol != '') {
         unsubscribeFromSymbol(symbol);
@@ -14,7 +14,8 @@ document.getElementById('submitButton').addEventListener('click', () => {
         }
         else {
             console.log('new symbol == null');
-            displayStockInfo('null', '0.0');
+            const errorDisplay = document.getElementById('priceDisplay');
+            errorDisplay.innerHTML = `No ticker picked`;
         }
     }
     else if (symbol == '') {
@@ -33,18 +34,18 @@ document.getElementById('submitButton').addEventListener('click', () => {
     }
 });
 
-// Function to subscribe to a stock symbol  (GPT)
+// Function to subscribe to a stock symbol, send request to websocket connection   (GPT)
 function subscribeToSymbol(symbol) {
     socket.send(JSON.stringify({ 'type': 'subscribe', 'symbol': symbol }));
 }
 
-// Function to unsubscribe from a stock symbol (GPT)
+// Function to unsubscribe from a stock symbol, sent to websocket connection (GPT)
 function unsubscribeFromSymbol(symbol) {
     console.log('Stopping price updates for: ' + symbol);
     socket.send(JSON.stringify({ 'type': 'unsubscribe', 'symbol': symbol }));
 }
 
-// Function to display the stock ticker and price  (GPT)
+// Function to display the stock ticker and price in the pricedisplay element (GPT)
 function displayStockInfo(symbol, price) {
     const priceDisplay = document.getElementById('priceDisplay');
     priceDisplay.innerHTML = `Stock Ticker: ${symbol}<br>Current Price: $${price}`;
